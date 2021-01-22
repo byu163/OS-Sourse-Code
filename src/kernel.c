@@ -20,6 +20,8 @@ typedef struct {
 	void* glyphBuffer;
 } PSF1_FONT;
 
+void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int color, char chr, unsigned int xOff, unsigned int yOff);
+
 void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
     
 	putChar(framebuffer, psf1_font, 0xffffffff, 'G', 10, 10);
