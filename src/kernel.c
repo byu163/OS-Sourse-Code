@@ -20,14 +20,6 @@ typedef struct {
 	void* glyphBuffer;
 } PSF1_FONT;
 
-void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int color, char chr, unsigned int xOff, unsigned int yOff);
-
-void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
-    
-	putChar(framebuffer, psf1_font, 0xffffffff, 'G', 10, 10);
-    return ;
-}
-
 void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int color, char chr, unsigned int xOff, unsigned int yOff)
 {
 	unsigned int* pixPtr = (unsigned int*)framebuffer->BaseAddress;
@@ -37,7 +29,13 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int color,
 			if ((*fontPtr & (0b10000000 >> (x - xOff))) > 0){
 				*(unsigned int*)(pixPtr + x + (y * framebuffer->PixelsPerScanLine)) = color;
 			}
-			fontPtr++;
 		}
+		fontPtr++;
 	}
+}
+
+void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
+    
+	putChar(framebuffer, psf1_font, 0xffffffff, 'G', 10, 10);
+    return ;
 }
